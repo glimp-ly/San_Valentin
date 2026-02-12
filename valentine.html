@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín? ❤️</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="valentine-body">
+
+    <!-- Background Animation Container -->
+    <div id="hearts-container"></div>
+
+    <div class="valentine-container">
+        <!-- Puedes cambiar este GIF por uno que te guste más -->
+        <img id="valentine-gif" class="valentine-gif" src="https://media.tenor.com/KpMkqV15HygAAAAi/cat-cats.gif"
+            alt="Cute GIF">
+
+        <h1 class="valentine-question">¿Quieres ser mi San Valentín? 🌹</h1>
+
+        <div class="buttons-container">
+            <button id="yesBtn" class="btn-yes">¡SÍ! 😍</button>
+            <button id="noBtn" class="btn-no">No 😢</button>
+        </div>
+
+        <div id="success-message" class="hidden-message">
+            <h2>¡SABÍA QUE DIRÍAS QUE SÍ! 💖</h2>
+            <p>Te amo muchísimo (y no tenías otra opción jeje)</p>
+            <a href="index.html" class="btn-back">Volver a Nuestra Historia</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
