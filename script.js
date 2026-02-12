@@ -1,15 +1,59 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. CONFIGURATION (USER: CHANGE DATE HERE) ---
-    const startDate = new Date(2023, 8, 14); // 14 de Septiembre de 2023 (Mes 8 es Septiembre)
+    // --- 0. LOGIN SYSTEM ---
+    const loginOverlay = document.getElementById('login-overlay');
+    const errorOverlay = document.getElementById('error-overlay');
+    const loginForm = document.getElementById('login-form');
+    const userInput = document.getElementById('username');
+    const passInput = document.getElementById('password');
+    const errorMsg = document.getElementById('login-error-msg');
+    const retryBtn = document.getElementById('retry-btn');
 
-    // --- 2. COUNTDOWN TIMER ---
+    // Credentials
+    const VALID_USER = "71338540";
+    const VALID_PASS = "140923";
+
+    // CHECK LOGIN STATUS
+    if (localStorage.getItem('valentine_login') === 'true') {
+        loginOverlay.classList.add('hidden');
+    }
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const user = userInput.value.trim();
+            const pass = passInput.value.trim();
+
+            if (user === VALID_USER && pass === VALID_PASS) {
+                // Success
+                localStorage.setItem('valentine_login', 'true');
+                loginOverlay.classList.add('hidden');
+            } else {
+                // Failure
+                loginOverlay.classList.add('hidden');
+                errorOverlay.classList.remove('hidden');
+                userInput.value = '';
+                passInput.value = '';
+            }
+        });
+    }
+
+    if (retryBtn) {
+        retryBtn.addEventListener('click', () => {
+            errorOverlay.classList.add('hidden');
+            loginOverlay.classList.remove('hidden');
+            errorMsg.textContent = "Intenta de nuevo";
+            setTimeout(() => { errorMsg.textContent = ''; }, 3000);
+        });
+    }
+
+    const startDate = new Date(2023, 8, 14);
+
     const daysEl = document.getElementById('days');
     const hoursEl = document.getElementById('hours');
     const minutesEl = document.getElementById('minutes');
-    const secondsEl = document.getElementById('seconds');
 
-    if (daysEl && hoursEl && minutesEl && secondsEl) {
+    if (daysEl && hoursEl && minutesEl) {
         function updateTimer() {
             const now = new Date();
             const diff = now - startDate;
@@ -17,18 +61,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
             const minutes = Math.floor((diff / 1000 / 60) % 60);
-            const seconds = Math.floor((diff / 1000) % 60);
 
             daysEl.textContent = days < 10 ? '0' + days : days;
             hoursEl.textContent = hours < 10 ? '0' + hours : hours;
             minutesEl.textContent = minutes < 10 ? '0' + minutes : minutes;
-            secondsEl.textContent = seconds < 10 ? '0' + seconds : seconds;
         }
         setInterval(updateTimer, 1000);
         updateTimer();
     }
 
-    // --- 3. MOBILE MENU TOGGLE ---
     const menuToggle = document.getElementById('mobile-menu');
     const navLinks = document.querySelector('.nav-links');
 

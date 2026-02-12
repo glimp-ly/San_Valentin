@@ -18,18 +18,42 @@
 
 <body>
 
-    <!-- Background Animation Container -->
+    <!-- fondo animado -->
     <div id="hearts-container"></div>
 
-    <!-- Navigation -->
+    <div id="login-overlay" class="overlay">
+        <div class="login-card glass-card">
+            <h2>Bienvenido</h2>
+            <p>Ingrese las credenciales para ingresar a la página.</p>
+            <form id="login-form">
+                <input type="text" id="username" placeholder="Usuario" required autocomplete="off">
+                <input type="password" id="password" placeholder="Contraseña" required autocomplete="off">
+                <button type="submit" class="btn-login">Entrar</button>
+            </form>
+            <p id="login-error-msg" class="error-msg"></p>
+        </div>
+    </div>
+
+    <div id="error-overlay" class="overlay hidden">
+        <div class="error-card glass-card">
+            <h2>¿Quién eres? 🤨</h2>
+            <div class="gif-container">
+                <img src="assets/error-login.gif" alt="Error GIF" id="error-gif">
+            </div>
+            <p>Credenciales incorrectas. Intenta de nuevo.</p>
+            <button id="retry-btn" class="btn-retry">Intentarlo de nuevo</button>
+        </div>
+    </div>
+
     <nav class="navbar">
-        <div class="nav-logo">Juntos ❤️</div>
+        <div class="nav-logo">4° San Valentin Juntos ❤️</div>
         <ul class="nav-links">
             <li><a href="#hero">Inicio</a></li>
             <li><a href="#timeline">Nuestra Historia</a></li>
             <li><a href="#reasons">Razones</a></li>
             <li><a href="#gallery">Recuerdos</a></li>
             <li><a href="#letter">Carta</a></li>
+            <li><a href="San_Valentin.html">14 de Febrero</a></li>
         </ul>
         <div class="menu-toggle" id="mobile-menu">
             <span class="bar"></span>
@@ -38,13 +62,12 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="hero" class="section hero">
         <div class="hero-content">
-            <h1 class="animate-text">Feliz San Valentín</h1>
-            <p class="subtitle">Celebrando 2 años maravillosos contigo</p>
+            <h1 class="animate-text">Olaaaa mi vida hermosaaaa</h1>
+            <p class="subtitle">Junto a tí por dos años y 4 San Valentin juntos</p>
             <div class="timer-container glass-card">
-                <h3>Llevamos Juntos</h3>
+                <h3>Nuestro tiempo juntos</h3>
                 <div id="timer">
                     <div class="time-box">
                         <span id="days">00</span>
@@ -58,42 +81,32 @@
                         <span id="minutes">00</span>
                         <small>Minutos</small>
                     </div>
-                    <div class="time-box">
-                        <span id="seconds">00</span>
-                        <small>Segundos</small>
-                    </div>
                 </div>
             </div>
-            <a href="#timeline" class="btn-scroll">Ver Nuestra Historia 👇</a>
         </div>
     </section>
 
-    <!-- Timeline Section -->
     <section id="timeline" class="section">
         <h2 class="section-title">Nuestra Historia</h2>
         <div class="timeline-container">
-            <!-- Timeline Item 1 -->
             <div class="timeline-item left">
                 <div class="content glass-card">
                     <h3>El Comienzo</h3>
                     <p>Todo empezó hace dos años... el momento exacto en que nuestras miradas se cruzaron.</p>
                 </div>
             </div>
-            <!-- Timeline Item 2 -->
             <div class="timeline-item right">
                 <div class="content glass-card">
                     <h3>Primera Cita</h3>
                     <p>Recuerdo los nervios, las risas, y cómo supe que eras especial desde ese instante.</p>
                 </div>
             </div>
-            <!-- Timeline Item 3 -->
             <div class="timeline-item left">
                 <div class="content glass-card">
                     <h3>Nuestro Primer Viaje</h3>
                     <p>Explorando el mundo juntos, creando recuerdos que durarán para siempre.</p>
                 </div>
             </div>
-            <!-- Timeline Item 4 -->
             <div class="timeline-item right">
                 <div class="content glass-card">
                     <h3>Hoy</h3>
@@ -103,7 +116,6 @@
         </div>
     </section>
 
-    <!-- Reasons Why I Love You Section -->
     <section id="reasons" class="section">
         <h2 class="section-title">Por Qué Te Amo</h2>
         <div class="reasons-grid">
@@ -130,7 +142,6 @@
         </div>
     </section>
 
-    <!-- Gallery Placeholder -->
     <section id="gallery" class="section">
         <h2 class="section-title">Nuestros Recuerdos</h2>
         <div class="gallery-grid">
@@ -146,7 +157,6 @@
         </div>
     </section>
 
-    <!-- Letter Section -->
     <section id="letter" class="section letter-section">
         <h2 class="section-title">Una Carta Para Ti</h2>
         <div class="envelope-wrapper" id="envelope">
@@ -167,7 +177,6 @@
             <button class="btn-open" onclick="toggleEnvelope()">Abrir Carta 💌</button>
         </div>
 
-        <!-- NEW: BUTTON TO VALENTINE PAGE -->
         <br><br><br><br>
         <div style="text-align: center; margin-top: 6rem;">
             <h3>Tengo algo importante que preguntarte...</h3>
