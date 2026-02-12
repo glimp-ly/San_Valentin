@@ -1,4 +1,3 @@
-/* Global Reset */
 * {
     margin: 0;
     padding: 0;
@@ -188,50 +187,6 @@ h3 {
     animation: bounce 2s infinite;
 }
 
-/* Timeline Section */
-.timeline-container {
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-
-/* Vertical Line */
-.timeline-container::after {
-    content: '';
-    position: absolute;
-    width: 4px;
-    background-color: var(--primary-color);
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    margin-left: -2px;
-}
-
-.timeline-item {
-    padding: 10px 40px;
-    position: relative;
-    background-color: inherit;
-    width: 50%;
-}
-
-.timeline-item::after {
-    content: '❤️';
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    right: -15px;
-    background-color: var(--background-dark);
-    border: 2px solid var(--primary-color);
-    top: 15px;
-    border-radius: 50%;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.8rem;
-}
-
 .left {
     left: 0;
 }
@@ -274,6 +229,13 @@ h3 {
     margin-bottom: 1rem;
 }
 
+.reason-card .icon img {
+    width: 3.5rem;
+    height: 3.5rem;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
 /* Gallery Grid */
 .gallery-grid {
     display: grid;
@@ -295,18 +257,28 @@ h3 {
 }
 
 .photo-placeholder {
-    font-size: 1.5rem;
-    color: rgba(255, 255, 255, 0.5);
-    border: 2px dashed rgba(255, 255, 255, 0.3);
-    width: 80%;
-    height: 80%;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
+    overflow: hidden;
+    /* Ensure image doesn't overflow */
 }
 
-/* Letter Envelope Logic */
+.photo-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* This makes the image fill the square */
+    transition: transform 0.5s ease;
+}
+
+.photo-placeholder:hover img {
+    transform: scale(1.1);
+}
+
 .letter-section {
     display: flex;
     flex-direction: column;
@@ -332,7 +304,6 @@ h3 {
     border-radius: 5px;
     z-index: 1;
     overflow: hidden;
-    /* Initially hidden content */
     transition: all 1s ease;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
     display: flex;
@@ -340,9 +311,7 @@ h3 {
     align-items: center;
 }
 
-/* Envelope Flap Triangle Effect (Simplified with CSS shapes) */
 .envelope::before {
-    /* Flap */
     content: '';
     position: absolute;
     top: 0;
@@ -352,7 +321,6 @@ h3 {
     border-left: 150px solid transparent;
     border-right: 150px solid transparent;
     border-top: 100px solid #a4161a;
-    /* Darker red */
     z-index: 10;
     transform-origin: top;
     transition: transform 0.5s ease 0.5s;
@@ -457,49 +425,41 @@ footer {
     }
 }
 
-/* Floating Hearts Background */
-.heart-bg {
+/* Floating Hearts Background (SVG) */
+.heart-svg {
     position: absolute;
-    width: 20px;
-    height: 20px;
-    background: rgba(255, 183, 178, 0.4);
-    transform: rotate(45deg);
+    width: 50px;
+    /* Default size, will be varied by JS */
+    height: 50px;
     animation: floating 10s infinite linear;
     z-index: -1;
+    overflow: visible;
 }
 
-.heart-bg::before,
-.heart-bg::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: inherit;
-    border-radius: 50%;
+/* SVG specific styles from user */
+.heart-svg path {
+    fill: rgba(255, 0, 0, 0.6);
+    /* Red with some transparency */
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
 }
 
-.heart-bg::before {
-    top: -10px;
-    left: 0;
-}
-
-.heart-bg::after {
-    left: -10px;
-    top: 0;
+.heart-svg * {
+    transform-box: fill-box;
+    transform-origin: center;
 }
 
 @keyframes floating {
     0% {
-        transform: translateY(100vh) rotate(45deg) scale(1);
+        transform: translateY(100vh) scale(0.5);
         opacity: 0;
     }
 
-    50% {
-        opacity: 0.8;
+    20% {
+        opacity: 1;
     }
 
     100% {
-        transform: translateY(-10vh) rotate(45deg) scale(1.2);
+        transform: translateY(-10vh) scale(1.2);
         opacity: 0;
     }
 }
@@ -630,8 +590,90 @@ footer {
     align-items: center;
     min-height: 100vh;
     overflow: hidden;
-    /* Evitar scrollbars cuando el NO button se mueva mucho */
     flex-direction: column;
+}
+
+/* --- LETTER POPUP STYLES --- */
+#letter-overlay {
+    background: rgba(0, 0, 0, 0.85);
+    /* Dark transparent backdrop like standard modals */
+    backdrop-filter: blur(5px);
+}
+
+.letter-card {
+    background: #fffaf0;
+    width: 90%;
+    max-width: 600px;
+    padding: 3rem 2rem;
+    border-radius: 10px;
+    /* Sharper corners for paper look */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8), inset 0 0 50px rgba(0, 0, 0, 0.05);
+    /* Depth */
+    position: relative;
+    max-height: 85vh;
+    overflow-y: auto;
+
+    /* Paper Texture */
+    background-image:
+        linear-gradient(#999 0.1rem, transparent 0.1rem),
+        radial-gradient(#e5e5f7 1px, transparent 1px);
+    background-size: 100% 1.5rem, 20px 20px;
+    background-position: 0 1.4rem, 0 0;
+
+    line-height: 1.5rem;
+    animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid #e0d4c5;
+}
+
+.letter-content {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.6rem;
+    color: #2c3e50;
+    text-align: left;
+    margin-top: 1rem;
+}
+
+.letter-content p {
+    margin-bottom: 1.2rem;
+}
+
+.signature {
+    text-align: right;
+    font-weight: bold;
+    margin-top: 2rem;
+    font-size: 1.3rem;
+}
+
+.close-btn-dark {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #2c3e50;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.close-btn-dark:hover {
+    transform: scale(1.2) rotate(90deg);
+    color: #e63946;
+}
+
+/* Scrollbar for letter */
+.letter-card::-webkit-scrollbar {
+    width: 8px;
+}
+
+.letter-card::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+.letter-card::-webkit-scrollbar-thumb {
+    background: #c0392b;
+    border-radius: 5px;
 }
 
 .valentine-container {
@@ -663,12 +705,10 @@ footer {
 .buttons-container {
     display: flex;
     justify-content: center;
-    gap: 2rem;
+    gap: 4rem;
     margin-top: 2rem;
     position: relative;
-    /* Para mover el NO relative a container o body */
     height: 100px;
-    /* Espacio para que no salte layout */
     align-items: center;
 }
 

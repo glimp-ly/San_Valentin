@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const VALID_PASS = "140923";
 
     // CHECK LOGIN STATUS
-    if (localStorage.getItem('valentine_login') === 'true') {
+    if (loginOverlay && localStorage.getItem('valentine_login') === 'true') {
         loginOverlay.classList.add('hidden');
     }
 
@@ -91,39 +91,81 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function createHeart() {
         if (!heartsContainer) return;
-        const heart = document.createElement('div');
-        heart.classList.add('heart-bg');
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-        const size = Math.random() * 20 + 10 + 'px';
+
+        const heart = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        heart.setAttribute("viewBox", "0 0 100 100");
+        heart.setAttribute("fill", "red"); // Can be overridden by CSS
+        heart.classList.add('heart-svg');
+
+        // Random size between 20px and 70px (base size is 50px in CSS)
+        const size = Math.random() * 50 + 20 + 'px';
         heart.style.width = size;
         heart.style.height = size;
+
+        heart.style.left = Math.random() * 100 + 'vw';
+
+        // Duration between 5s and 15s to match the float animation
+        heart.style.animationDuration = Math.random() * 10 + 5 + 's';
+
+        heart.innerHTML = `
+            <path d="M 10,30
+            A 20,20 0,0,1 50,30
+            A 20,20 0,0,1 90,30
+            Q 90,60 50,90
+            Q 10,60 10,30 z">
+            <animateTransform attributeName="transform"
+            attributeType="XML" type="scale" dur="1s"
+            values="0.75;0.8;1;0.9; 0.75" keyTimes="0;0.45;0.5;0.75;1"
+            repeatCount="indefinite">
+            </animateTransform>
+            </path>
+        `;
+
         heartsContainer.appendChild(heart);
-        setTimeout(() => { heart.remove(); }, 5000);
+
+        // Remove after animation completes (max duration + buffer)
+        setTimeout(() => { heart.remove(); }, 15000);
     }
 
     if (heartsContainer) {
         setInterval(createHeart, 300);
     }
 
-    // --- 5. ENVELOPE INTERACTION ---
-    const envelope = document.querySelector('.envelope');
-    const letter = document.querySelector('.letter');
+    // --- FLOWER POPUP ---
+    const flowerBtn = document.getElementById('flower-btn');
+    const flowersSection = document.getElementById('flowers-section');
+    const closeFlowersBtn = document.getElementById('close-flowers');
 
-    // Define global function only if elements exist
-    if (envelope && letter) {
-        window.toggleEnvelope = function () {
-            envelope.classList.toggle('open');
-            if (envelope.classList.contains('open')) {
-                setTimeout(() => {
-                    letter.style.opacity = '1';
-                    letter.style.transform = 'translateY(-20px)';
-                }, 500);
-            } else {
-                letter.style.opacity = '0';
-                letter.style.transform = 'translateY(100%)';
+    if (flowerBtn && flowersSection && closeFlowersBtn) {
+        flowerBtn.addEventListener('click', () => {
+            flowersSection.classList.add('show-flowers');
+        });
+
+        closeFlowersBtn.addEventListener('click', () => {
+            flowersSection.classList.remove('show-flowers');
+        });
+    }
+
+    // --- 5. ENVELOPE INTERACTION (Letter Popup) ---
+    const openLetterBtn = document.getElementById('open-letter-btn');
+    const letterOverlay = document.getElementById('letter-overlay');
+    const closeLetterBtn = document.getElementById('close-letter');
+
+    if (openLetterBtn && letterOverlay && closeLetterBtn) {
+        openLetterBtn.addEventListener('click', () => {
+            letterOverlay.classList.remove('hidden');
+        });
+
+        closeLetterBtn.addEventListener('click', () => {
+            letterOverlay.classList.add('hidden');
+        });
+
+        // Close when clicking outside content
+        letterOverlay.addEventListener('click', (e) => {
+            if (e.target === letterOverlay) {
+                letterOverlay.classList.add('hidden');
             }
-        };
+        });
     }
 
     // --- 6. SCROLL REVEAL ANIMATION ---
@@ -164,6 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
             noBtn.style.position = 'fixed';
             noBtn.style.left = randomX + 'px';
             noBtn.style.top = randomY + 'px';
+            noBtn.style.transition = 'all 0.1s ease'; // Faster transition for movement
 
             // Text change
             const funTexts = ["¿Segura?", "¿En serio?", "¡Piénsalo!", "¡No puedes!", "¡Mira el otro!", "¡Di que sí!"];
@@ -174,15 +217,17 @@ document.addEventListener('DOMContentLoaded', () => {
             yesBtn.style.transform = `scale(${scale})`;
         };
 
-        // Mouse (PC)
+        // Mouse (PC) - Use mouseover and mouseenter for better coverage
         noBtn.addEventListener('mouseover', moveNoButton);
-        // Touch (Mobile) - prevenimos el click
-        noBtn.addEventListener('click', (e) => {
+        noBtn.addEventListener('mouseenter', moveNoButton);
+
+        // Mobile
+        noBtn.addEventListener('touchstart', (e) => {
             e.preventDefault();
             moveNoButton();
         });
-        noBtn.addEventListener('touchstart', (e) => {
-            e.preventDefault(); // Impedir click
+        noBtn.addEventListener('click', (e) => {
+            e.preventDefault();
             moveNoButton();
         });
 
@@ -192,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Change GIF and Text
             if (checklist) checklist.src = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif";
-            if (questionHeader) questionHeader.textContent = "¡Yayyy! ¡Gracias mi amor! 💖";
+            if (questionHeader) questionHeader.textContent = "¡Yeiiiii! ¡Gracias mi amor! 💖";
 
             // Show message
             if (successMsg) {

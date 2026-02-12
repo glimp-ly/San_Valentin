@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi Futura Esposa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .date-lock-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            background: linear-gradient(-45deg, #1a0505, #4a0404, #2b0000, #1a0505);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        #locked-content,
+        #unlocked-content {
+            display: none;
+        }
+
+        .show-content {
+            display: block !important;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="date-lock-container">
+
+        <div id="locked-content" class="error-card">
+            <h2>¡Aún no es hora!</h2>
+            <div class="gif-container">
+                <img src="assets/no_14_sep.gif" alt="Wait GIF" style="max-width: 100%; border-radius: 10px;">
+            </div>
+            <p style="font-size: 1.2rem; margin-top: 1rem; color: black;">Todavía no es San Valentin.</p>
+            <p style="color: black;">Vuelve cuando sea el momento especial.</p>
+            <br>
+            <a href="index.html" class="btn-retry" style="text-decoration: none; display: inline-block;">Volver al
+                Inicio</a>
+        </div>
+
+        <div id="unlocked-content" class="login-card">
+            <h2>¡Feliz San Valentín!</h2>
+            <p>Hoy es el día especial que hemos estado esperando.</p>
+            <br>
+            <p style="font-size: 1.5rem;">Te amo infinito.</p>
+            <br>
+            <a href="index.html" class="btn-retry" style="text-decoration: none; display: inline-block;">Volver al
+                Inicio</a>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const targetDate = new Date('2026-02-14T00:00:00');
+            const now = new Date();
+
+            const lockedContent = document.getElementById('locked-content');
+            const unlockedContent = document.getElementById('unlocked-content');
+
+            if (now >= targetDate) {
+                unlockedContent.classList.add('show-content');
+            } else {
+                lockedContent.classList.add('show-content');
+            }
+        });
+    </script>
+
+</body>
+
+</html>
