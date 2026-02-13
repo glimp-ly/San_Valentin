@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 0. LOGIN SYSTEM ---
     const loginOverlay = document.getElementById('login-overlay');
     const errorOverlay = document.getElementById('error-overlay');
     const loginForm = document.getElementById('login-form');
@@ -9,11 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorMsg = document.getElementById('login-error-msg');
     const retryBtn = document.getElementById('retry-btn');
 
-    // Credentials
     const VALID_USER = "71338540";
     const VALID_PASS = "140923";
 
-    // CHECK LOGIN STATUS
     if (loginOverlay && localStorage.getItem('valentine_login') === 'true') {
         loginOverlay.classList.add('hidden');
     }
@@ -25,11 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const pass = passInput.value.trim();
 
             if (user === VALID_USER && pass === VALID_PASS) {
-                // Success
                 localStorage.setItem('valentine_login', 'true');
                 loginOverlay.classList.add('hidden');
             } else {
-                // Failure
                 loginOverlay.classList.add('hidden');
                 errorOverlay.classList.remove('hidden');
                 userInput.value = '';
@@ -78,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
             navLinks.classList.toggle('active');
         });
 
-        // Close menu when clicking a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
@@ -86,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 4. HEART RAIN ANIMATION ---
     const heartsContainer = document.getElementById('hearts-container');
 
     function createHeart() {
@@ -94,17 +87,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const heart = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         heart.setAttribute("viewBox", "0 0 100 100");
-        heart.setAttribute("fill", "red"); // Can be overridden by CSS
+        heart.setAttribute("fill", "red");
         heart.classList.add('heart-svg');
 
-        // Random size between 20px and 70px (base size is 50px in CSS)
         const size = Math.random() * 50 + 20 + 'px';
         heart.style.width = size;
         heart.style.height = size;
 
         heart.style.left = Math.random() * 100 + 'vw';
 
-        // Duration between 5s and 15s to match the float animation
         heart.style.animationDuration = Math.random() * 10 + 5 + 's';
 
         heart.innerHTML = `
@@ -123,7 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         heartsContainer.appendChild(heart);
 
-        // Remove after animation completes (max duration + buffer)
         setTimeout(() => { heart.remove(); }, 15000);
     }
 
@@ -131,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
         setInterval(createHeart, 300);
     }
 
-    // --- FLOWER POPUP ---
     const flowerBtn = document.getElementById('flower-btn');
     const flowersSection = document.getElementById('flowers-section');
     const closeFlowersBtn = document.getElementById('close-flowers');
@@ -146,7 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 5. ENVELOPE INTERACTION (Letter Popup) ---
     const openLetterBtn = document.getElementById('open-letter-btn');
     const letterOverlay = document.getElementById('letter-overlay');
     const closeLetterBtn = document.getElementById('close-letter');
@@ -160,7 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
             letterOverlay.classList.add('hidden');
         });
 
-        // Close when clicking outside content
         letterOverlay.addEventListener('click', (e) => {
             if (e.target === letterOverlay) {
                 letterOverlay.classList.add('hidden');
@@ -168,7 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 6. SCROLL REVEAL ANIMATION ---
     const items = document.querySelectorAll('.timeline-item, .reason-card, .photo-frame');
     if (items.length > 0) {
         const observer = new IntersectionObserver(entries => {
@@ -185,7 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 7. VALENTINE PAGE LOGIC ---
     const noBtn = document.getElementById('noBtn');
     const yesBtn = document.getElementById('yesBtn');
     const checklist = document.getElementById('valentine-gif');
@@ -206,22 +191,19 @@ document.addEventListener('DOMContentLoaded', () => {
             noBtn.style.position = 'fixed';
             noBtn.style.left = randomX + 'px';
             noBtn.style.top = randomY + 'px';
-            noBtn.style.transition = 'all 0.1s ease'; // Faster transition for movement
+            noBtn.style.transition = 'all 0.1s ease';
 
-            // Text change
             const funTexts = ["¿Segura?", "¿En serio?", "¡Piénsalo!", "¡No puedes!", "¡Mira el otro!", "¡Di que sí!"];
             noBtn.textContent = funTexts[Math.floor(Math.random() * funTexts.length)];
 
-            // Grow YES button
+            // crecimiento del boton de si
             scale += 0.2;
             yesBtn.style.transform = `scale(${scale})`;
         };
 
-        // Mouse (PC) - Use mouseover and mouseenter for better coverage
         noBtn.addEventListener('mouseover', moveNoButton);
         noBtn.addEventListener('mouseenter', moveNoButton);
 
-        // Mobile
         noBtn.addEventListener('touchstart', (e) => {
             e.preventDefault();
             moveNoButton();
@@ -232,17 +214,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         yesBtn.addEventListener('click', () => {
-            // Hide buttons with fade
             if (btnContainer) btnContainer.style.display = 'none';
 
-            // Change GIF and Text
             if (checklist) checklist.src = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif";
             if (questionHeader) questionHeader.textContent = "¡Yeiiiii! ¡Gracias mi amor! 💖";
 
-            // Show message
             if (successMsg) {
                 successMsg.style.display = 'flex';
-                // Trigger confetti
                 for (let i = 0; i < 50; i++) setTimeout(createHeart, i * 50);
             }
         });

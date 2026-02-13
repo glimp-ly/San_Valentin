@@ -39,7 +39,6 @@ body {
     }
 }
 
-/* Typography */
 h1,
 h2,
 h3 {
@@ -54,7 +53,6 @@ h3 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Glass Card Style */
 .glass-card {
     background: var(--glass-bg);
     backdrop-filter: blur(10px);
@@ -70,7 +68,6 @@ h3 {
     box-shadow: 0 8px 12px rgba(230, 57, 70, 0.2);
 }
 
-/* Navigation */
 .navbar {
     position: fixed;
     top: 0;
@@ -122,7 +119,6 @@ h3 {
     transition: 0.4s;
 }
 
-/* Hero Section */
 .hero {
     height: 100vh;
     display: flex;
@@ -209,7 +205,6 @@ h3 {
     border-radius: 15px;
 }
 
-/* Reasons Grid */
 .reasons-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -236,7 +231,6 @@ h3 {
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
-/* Gallery Grid */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -248,7 +242,6 @@ h3 {
 
 .photo-frame {
     aspect-ratio: 1/1;
-    /* Square photos */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -264,14 +257,12 @@ h3 {
     align-items: center;
     border-radius: 10px;
     overflow: hidden;
-    /* Ensure image doesn't overflow */
 }
 
 .photo-placeholder img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* This makes the image fill the square */
     transition: transform 0.5s ease;
 }
 
@@ -338,7 +329,6 @@ h3 {
     right: 10px;
     bottom: 0;
     background-color: #fffaf0;
-    /* Paper color */
     color: #333;
     padding: 20px;
     font-family: 'Dancing Script', cursive;
@@ -347,7 +337,6 @@ h3 {
     z-index: 5;
     transition: transform 0.5s ease 1s;
     transform: translateY(100%);
-    /* Start hidden inside */
     opacity: 0;
 }
 
@@ -365,7 +354,6 @@ h3 {
 
 .btn-open {
     margin-top: 250px;
-    /* Push button down */
     padding: 10px 20px;
     background: var(--primary-color);
     color: white;
@@ -385,7 +373,6 @@ h3 {
     color: #1a0505;
 }
 
-/* Footer */
 footer {
     text-align: center;
     padding: 2rem;
@@ -393,7 +380,6 @@ footer {
     margin-top: 4rem;
 }
 
-/* Keyframes */
 @keyframes bounce {
 
     0%,
@@ -425,21 +411,17 @@ footer {
     }
 }
 
-/* Floating Hearts Background (SVG) */
 .heart-svg {
     position: absolute;
     width: 50px;
-    /* Default size, will be varied by JS */
     height: 50px;
     animation: floating 10s infinite linear;
     z-index: -1;
     overflow: visible;
 }
 
-/* SVG specific styles from user */
 .heart-svg path {
     fill: rgba(255, 0, 0, 0.6);
-    /* Red with some transparency */
     filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
 }
 
@@ -464,7 +446,6 @@ footer {
     }
 }
 
-/* Mobile Responsiveness */
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 3rem;
@@ -472,7 +453,6 @@ footer {
 
     .nav-links {
         display: none;
-        /* Hide for now, toggle later */
         flex-direction: column;
         width: 100%;
         position: absolute;
@@ -491,7 +471,6 @@ footer {
         display: flex;
     }
 
-    /* Timeline Adjustments */
     .timeline-container::after {
         left: 31px;
     }
@@ -521,7 +500,6 @@ footer {
     }
 }
 
-/* Floating Hearts Container */
 #hearts-container {
     position: fixed;
     top: 0;
@@ -530,10 +508,8 @@ footer {
     height: 100%;
     pointer-events: none;
     z-index: 1;
-    /* Behind content but in front of gradient if needed, actually 0 might be better or -1 */
 }
 
-/* Ensure content is above hearts */
 section,
 nav,
 footer {
@@ -541,7 +517,6 @@ footer {
     position: relative;
 }
 
-/* Scroll Animation Classes */
 .hidden {
     opacity: 0;
     transform: translateY(50px);
@@ -553,7 +528,6 @@ footer {
     transform: translateY(0);
 }
 
-/* Specific Timeline Animation */
 .timeline-item.left.hidden {
     transform: translateX(-100px);
 }
@@ -583,7 +557,6 @@ footer {
     }
 }
 
-/* --- Valentine Page Styles --- */
 .valentine-body {
     display: flex;
     justify-content: center;
@@ -593,10 +566,8 @@ footer {
     flex-direction: column;
 }
 
-/* --- LETTER POPUP STYLES --- */
 #letter-overlay {
     background: rgba(0, 0, 0, 0.85);
-    /* Dark transparent backdrop like standard modals */
     backdrop-filter: blur(5px);
 }
 
@@ -606,14 +577,10 @@ footer {
     max-width: 600px;
     padding: 3rem 2rem;
     border-radius: 10px;
-    /* Sharper corners for paper look */
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.8), inset 0 0 50px rgba(0, 0, 0, 0.05);
-    /* Depth */
     position: relative;
     max-height: 85vh;
     overflow-y: auto;
-
-    /* Paper Texture */
     background-image:
         linear-gradient(#999 0.1rem, transparent 0.1rem),
         radial-gradient(#e5e5f7 1px, transparent 1px);
@@ -661,7 +628,6 @@ footer {
     color: #e63946;
 }
 
-/* Scrollbar for letter */
 .letter-card::-webkit-scrollbar {
     width: 8px;
 }
@@ -729,7 +695,6 @@ footer {
     color: white;
     box-shadow: 0 4px 0 #27ae60;
     z-index: 20;
-    /* Siempre encima */
 }
 
 .btn-yes:hover {
@@ -741,12 +706,9 @@ footer {
     color: white;
     box-shadow: 0 4px 0 #c0392b;
     position: absolute;
-    /* Para moverlo libremente */
     left: 60%;
-    /* Posición inicial */
 }
 
-/* Hidden Success Message */
 .hidden-message {
     display: none;
     flex-direction: column;
@@ -768,7 +730,6 @@ footer {
     font-size: 1.2rem;
 }
 
-/* --- OVERLAYS (LOGIN & ERROR) --- */
 .overlay {
     position: fixed;
     top: 0;
@@ -780,7 +741,6 @@ footer {
     justify-content: center;
     align-items: center;
     z-index: 2000;
-    /* Highest priority */
     transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 

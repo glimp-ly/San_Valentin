@@ -18,21 +18,121 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             width: 100%;
             background: linear-gradient(-45deg, #1a0505, #4a0404, #2b0000, #1a0505);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         #locked-content,
         #unlocked-content {
             display: none;
+            width: 100%;
+            max-width: 800px;
         }
 
         .show-content {
             display: block !important;
             animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .tour-carousel {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide {
+            display: none;
+            animation: fadeEffect 1s;
+        }
+
+        .slide.active-slide {
+            display: block;
+        }
+
+        @keyframes fadeEffect {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .slide h2 {
+            font-family: 'Dancing Script', cursive;
+            color: #e63946;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .slide p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .img-placeholder {
+            width: 100%;
+            height: 300px;
+            background-color: #eee;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border: 2px dashed #ccc;
+            position: relative;
+        }
+
+        .img-placeholder::after {
+            content: 'Insertar Imagen Aquí';
+            color: #888;
+            font-weight: bold;
+        }
+
+        .img-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .nav-btn {
+            background: #e63946;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+            margin: 5px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .nav-btn:hover {
+            background: #d63354;
+            transform: scale(1.05);
+        }
+
+        .nav-btn.secondary {
+            background: #555;
         }
     </style>
 </head>
@@ -53,14 +153,65 @@
                 Inicio</a>
         </div>
 
-        <div id="unlocked-content" class="login-card">
-            <h2>¡Feliz San Valentín!</h2>
-            <p>Hoy es el día especial que hemos estado esperando.</p>
-            <br>
-            <p style="font-size: 1.5rem;">Te amo infinito.</p>
-            <br>
-            <a href="index.html" class="btn-retry" style="text-decoration: none; display: inline-block;">Volver al
-                Inicio</a>
+        <div id="unlocked-content">
+            <div class="tour-carousel">
+
+                <!-- Slide 1: Cafetería -->
+                <div class="slide active-slide" id="slide-1">
+                    <h2>1. Nuestra Cita Comienza en una Cafetería ☕</h2>
+                    <div class="img-placeholder">
+                        <!-- <img src="ruta/a/imagen1.jpg" alt="Cafetería"> -->
+                    </div>
+                    <p>Empezamos el día con un delicioso desayuno y una buena charla, solo tú y yo.</p>
+                    <button class="nav-btn" onclick="nextSlide(2)">Siguiente ➡️</button>
+                </div>
+
+                <!-- Slide 2: Centro Comercial -->
+                <div class="slide" id="slide-2">
+                    <h2>2. Paseo por el Centro Comercial 🛍️</h2>
+                    <div class="img-placeholder">
+                        <!-- <img src="ruta/a/imagen2.jpg" alt="Centro Comercial"> -->
+                    </div>
+                    <p>Vamos de compras, vemos vitrinas y disfrutamos de caminar juntos de la mano.</p>
+                    <button class="nav-btn secondary" onclick="nextSlide(1)">⬅️ Anterior</button>
+                    <button class="nav-btn" onclick="nextSlide(3)">Siguiente ➡️</button>
+                </div>
+
+                <!-- Slide 3: Restaurante -->
+                <div class="slide" id="slide-3">
+                    <h2>3. Almuerzo Romántico 🍝</h2>
+                    <div class="img-placeholder">
+                        <!-- <img src="ruta/a/imagen3.jpg" alt="Restaurante"> -->
+                    </div>
+                    <p>Un almuerzo especial en nuestro lugar favorito, disfrutando de nuestra comida y compañía.</p>
+                    <button class="nav-btn secondary" onclick="nextSlide(2)">⬅️ Anterior</button>
+                    <button class="nav-btn" onclick="nextSlide(4)">Siguiente ➡️</button>
+                </div>
+
+                <!-- Slide 4: Joyería -->
+                <div class="slide" id="slide-4">
+                    <h2>4. Una Sorpresa Especial 💍</h2>
+                    <div class="img-placeholder">
+                        <!-- <img src="ruta/a/imagen4.jpg" alt="Joyería"> -->
+                    </div>
+                    <p>Un detalle brillante para la persona que ilumina mi vida cada día.</p>
+                    <button class="nav-btn secondary" onclick="nextSlide(3)">⬅️ Anterior</button>
+                    <button class="nav-btn" onclick="nextSlide(5)">Siguiente ➡️</button>
+                </div>
+
+                <!-- Slide 5: Parque -->
+                <div class="slide" id="slide-5">
+                    <h2>5. Atardecer en el Parque 🌳</h2>
+                    <div class="img-placeholder">
+                        <!-- <img src="ruta/a/imagen5.jpg" alt="Parque"> -->
+                    </div>
+                    <p>Terminamos el día viendo el atardecer, agradeciendo por un San Valentín perfecto a tu lado.</p>
+                    <p style="font-weight: bold; color: #e63946;">¡Te Amo!</p>
+                    <button class="nav-btn secondary" onclick="nextSlide(4)">⬅️ Anterior</button>
+                    <a href="index.html" class="nav-btn" style="text-decoration: none;">Finalizar Cita ❤️</a>
+                </div>
+
+            </div>
         </div>
 
     </div>
@@ -69,6 +220,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const targetDate = new Date('2026-02-14T00:00:00');
             const now = new Date();
+            // const now = new Date('2026-02-14T00:00:01');
 
             const lockedContent = document.getElementById('locked-content');
             const unlockedContent = document.getElementById('unlocked-content');
@@ -79,6 +231,19 @@
                 lockedContent.classList.add('show-content');
             }
         });
+
+        // Carousel Logic
+        function nextSlide(slideNumber) {
+            // Hide all slides
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.classList.remove('active-slide'));
+
+            // Show target slide
+            const targetSlide = document.getElementById('slide-' + slideNumber);
+            if (targetSlide) {
+                targetSlide.classList.add('active-slide');
+            }
+        }
     </script>
 
 </body>

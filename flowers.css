@@ -1,6 +1,3 @@
-/* Flower Animation CSS - Adapted for Red Tulips */
-
-/* Wrapper for the section */
 #flowers-section {
     position: fixed;
     top: 50%;
@@ -28,7 +25,6 @@
     visibility: visible;
 }
 
-/* Floating Action Button */
 .flower-fab {
     position: fixed;
     bottom: 30px;
@@ -58,7 +54,6 @@
     transform: scale(0.95);
 }
 
-/* Close Button */
 .close-btn {
     position: absolute;
     top: 20px;
@@ -84,7 +79,6 @@
 }
 
 
-/* Night Background */
 .night {
     position: absolute;
     left: 50%;
@@ -110,7 +104,6 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    /* Align flowers to bottom of container */
 }
 
 .flower {
@@ -159,7 +152,6 @@
     transform: rotate(20deg);
     animation: moving-flower-2 4s linear infinite;
     margin-left: 10vmin;
-    /* Offset to not overlap perfectly */
 }
 
 .flower--2 .flower__line {
@@ -188,7 +180,6 @@
     transform: rotate(-15deg);
     animation: moving-flower-3 4s linear infinite;
     margin-left: -10vmin;
-    /* Offset */
 }
 
 .flower--3 .flower__line {
