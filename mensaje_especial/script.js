@@ -3,28 +3,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const ctrlBtn = document.getElementById('audio-control');
 
     if (audio) {
-        // audio.currentTime = 60; // Start at 1 minute // Moving this inside play attempt to be safe or loadedmetadata
 
         const startAudio = () => {
-            if (audio.currentTime < 60) audio.currentTime = 60; // Ensure start time
+            if (audio.currentTime < 60) audio.currentTime = 60;
             audio.play().then(() => {
                 ctrlBtn.classList.add('playing');
-                document.body.removeEventListener('click', startAudio); // Remove fallback
+                document.body.removeEventListener('click', startAudio);
             }).catch(error => {
                 console.log("Autoplay prevented:", error);
                 ctrlBtn.classList.remove('playing');
             });
         };
 
-        // Attempt immediate autoplay
         startAudio();
 
-        // Fallback: Play on first interaction if autoplay failed
         document.body.addEventListener('click', startAudio);
 
-        // Toggle Logic
         ctrlBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent body click from firing
+            e.stopPropagation();
             if (audio.paused) {
                 audio.play();
                 ctrlBtn.classList.add('playing');

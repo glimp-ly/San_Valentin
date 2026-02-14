@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const targetDate = new Date('2026-02-13T21:19:00');
+    const targetDate = new Date('2026-02-14T00:00:00');
     const now = new Date();
 
     const lockedContent = document.getElementById('locked-content');
