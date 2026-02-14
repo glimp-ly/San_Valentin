@@ -1,0 +1,362 @@
+:root {
+    --primary-color: #e63946;
+    --secondary-color: #ffb3c1;
+    --text-color: #f1faee;
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --background-dark: #1a0505;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(-45deg, #1a0505, #4a0404, #2b0000, #1a0505);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-color);
+    overflow: hidden;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Container */
+.special-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Wrapper */
+.special-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+    padding: 40px;
+    width: 100%;
+    max-width: 1000px;
+    background: rgba(26, 5, 5, 0.6);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    animation: popIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.message-content {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+    z-index: 10;
+}
+
+.message-content h2 {
+    font-family: 'Dancing Script', cursive;
+    color: var(--secondary-color);
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.message-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.flower-collage {
+    flex: 1.2;
+    position: relative;
+    min-height: 450px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Collage Images - Tight & Stacked */
+.collage-img {
+    position: absolute;
+    width: 50%;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+    border: 3px solid #fff;
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.img-1 {
+    top: 12%;
+    left: 8%;
+    transform: rotate(-12deg);
+    z-index: 1;
+}
+
+.img-2 {
+    top: 8%;
+    right: 8%;
+    transform: rotate(8deg);
+    z-index: 2;
+}
+
+.img-3 {
+    bottom: 12%;
+    left: 8%;
+    transform: rotate(-5deg);
+    z-index: 3;
+}
+
+.img-4 {
+    bottom: 8%;
+    right: 8%;
+    transform: rotate(5deg);
+    z-index: 4;
+}
+
+/* Hover Effect */
+.special-content-wrapper:hover .img-1 {
+    transform: rotate(-18deg) translate(-15px, -15px);
+}
+
+.special-content-wrapper:hover .img-2 {
+    transform: rotate(12deg) translate(15px, -15px);
+}
+
+.special-content-wrapper:hover .img-3 {
+    transform: rotate(-10deg) translate(-15px, 15px);
+}
+
+.special-content-wrapper:hover .img-4 {
+    transform: rotate(10deg) translate(15px, 15px);
+}
+
+/* Floating Audio Button */
+.audio-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 3000;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    width: 60px;
+    /* Adjust size as requested */
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    overflow: hidden;
+    /* Crop image to circle */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    padding: 0;
+}
+
+.audio-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+}
+
+.audio-btn:hover {
+    transform: scale(1.1);
+}
+
+.audio-btn.playing img {
+    animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Button */
+.nav-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: 0 4px 10px rgba(230, 57, 70, 0.3);
+}
+
+.nav-btn:hover {
+    background: #d63354;
+    transform: scale(1.05);
+}
+
+/* Back to Home Button */
+.back-home-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 3000;
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--text-color);
+    border: 1px solid var(--glass-border);
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.back-home-btn:hover {
+    background: rgba(230, 57, 70, 0.8);
+    transform: translateX(-5px);
+}
+
+/* Letter Popup */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.letter-card {
+    background: #fffaf0;
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    /* Limit height */
+    display: flex;
+    /* Flex to manage content flow */
+    flex-direction: column;
+    padding: 40px;
+    padding-top: 50px;
+    /* Space for close button */
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    position: relative;
+    transform: translateY(50px);
+    transition: transform 0.3s ease;
+    color: #333;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.3rem;
+    line-height: 1.6;
+    background-image: linear-gradient(#e1e1e1 1px, transparent 1px);
+    background-size: 100% 1.6em;
+}
+
+.letter-content {
+    overflow-y: auto;
+    /* Scrollable text */
+    flex: 1;
+    /* Take remaining space */
+    padding-right: 10px;
+    /* Space for scrollbar */
+}
+
+.overlay.active .letter-card {
+    transform: translateY(0);
+}
+
+.letter-top h2 {
+    color: #c0392b;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: #555;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #c0392b;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .special-content-wrapper {
+        flex-direction: column-reverse;
+        /* Collage on top/bottom? Image usually better on top if small, but let's see. */
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .flower-collage {
+        width: 100%;
+        min-height: 300px;
+        flex: none;
+    }
+
+    .collage-img {
+        width: 45%;
+    }
+
+    .message-content h2 {
+        font-size: 2rem;
+    }
+}

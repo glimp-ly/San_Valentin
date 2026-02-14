@@ -12,129 +12,7 @@
         rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
-
-    <style>
-        .date-lock-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            width: 100%;
-            background: linear-gradient(-45deg, #1a0505, #4a0404, #2b0000, #1a0505);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        #locked-content,
-        #unlocked-content {
-            display: none;
-            width: 100%;
-            max-width: 800px;
-        }
-
-        .show-content {
-            display: block !important;
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .tour-carousel {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            min-height: 500px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .slide {
-            display: none;
-            animation: fadeEffect 1s;
-        }
-
-        .slide.active-slide {
-            display: block;
-        }
-
-        @keyframes fadeEffect {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        .slide h2 {
-            font-family: 'Dancing Script', cursive;
-            color: #e63946;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .slide p {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.1rem;
-            color: #333;
-            margin-bottom: 1.5rem;
-        }
-
-        .img-placeholder {
-            width: 100%;
-            height: 300px;
-            background-color: #eee;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            border: 2px dashed #ccc;
-            position: relative;
-        }
-
-        .img-placeholder::after {
-            content: 'Insertar Imagen Aquí';
-            color: #888;
-            font-weight: bold;
-        }
-
-        .img-placeholder img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .nav-btn {
-            background: #e63946;
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 50px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: transform 0.2s, background 0.3s;
-            margin: 5px;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .nav-btn:hover {
-            background: #d63354;
-            transform: scale(1.05);
-        }
-
-        .nav-btn.secondary {
-            background: #555;
-        }
-    </style>
+    <link rel="stylesheet" href="san_valentin.css">
 </head>
 
 <body>
@@ -156,96 +34,233 @@
         <div id="unlocked-content">
             <div class="tour-carousel">
 
-                <!-- Slide 1: Cafetería -->
-                <div class="slide active-slide" id="slide-1">
-                    <h2>1. Nuestra Cita Comienza en una Cafetería ☕</h2>
-                    <div class="img-placeholder">
-                        <!-- <img src="ruta/a/imagen1.jpg" alt="Cafetería"> -->
+                <div class="slide active-slide" id="slide-1" data-total="0"
+                    style="background-image: url('cafeteria/bg.jpg');">
+                    <div class="slide-header">
+                        <h2>Nuestra Cita Comienza en una Cafetería</h2>
+                        <p>Elige lo que quieres que comamos mi amor:</p>
                     </div>
-                    <p>Empezamos el día con un delicioso desayuno y una buena charla, solo tú y yo.</p>
-                    <button class="nav-btn" onclick="nextSlide(2)">Siguiente ➡️</button>
+
+                    <div class="shop-grid">
+                        <div class="shop-item" onclick="toggleItem(this, 5)">
+                            <img src="cafeteria/img_1.png" alt="Café Latte">
+                            <h3>Café Latte</h3>
+                            <p class="price">$5.00</p>
+                        </div>
+                        <div class="shop-item" onclick="toggleItem(this, 4)">
+                            <img src="cafeteria/img_2.png" alt="Pie de Manzana">
+                            <h3>Pie de Manzana</h3>
+                            <p class="price">$4.00</p>
+                        </div>
+                        <div class="shop-item" onclick="toggleItem(this, 3)">
+                            <img src="cafeteria/img_3.png" alt="Empanada">
+                            <h3>Empanada</h3>
+                            <p class="price">$3.00</p>
+                        </div>
+                        <div class="shop-item" onclick="toggleItem(this, 2)">
+                            <img src="cafeteria/img_4.png" alt="Chifón">
+                            <h3>Chifón</h3>
+                            <p class="price">$2.00</p>
+                        </div>
+                    </div>
+
+                    <div class="checkout-area">
+                        <h3>Total: $<span class="total-display">0</span></h3>
+                        <button class="nav-btn pay-btn" onclick="openPaymentModal(1)">Realizar Pago</button>
+                    </div>
+
+                    <div class="nav-controls">
+                        <span></span>
+                        <button class="nav-btn" onclick="nextSlide(2)">Siguiente ➡️</button>
+                    </div>
                 </div>
 
-                <!-- Slide 2: Centro Comercial -->
-                <div class="slide" id="slide-2">
-                    <h2>2. Paseo por el Centro Comercial 🛍️</h2>
-                    <div class="img-placeholder">
-                        <!-- <img src="ruta/a/imagen2.jpg" alt="Centro Comercial"> -->
+                <div class="slide" id="slide-2" data-total="0"
+                    style="background-image: url('centro_comercial/bg.jpg');">
+                    <div class="slide-header">
+                        <h2>Paseo por el Centro Comercial</h2>
+                        <p>Vamos a comprar mi vida, elige lo que más te guste:</p>
                     </div>
-                    <p>Vamos de compras, vemos vitrinas y disfrutamos de caminar juntos de la mano.</p>
-                    <button class="nav-btn secondary" onclick="nextSlide(1)">⬅️ Anterior</button>
-                    <button class="nav-btn" onclick="nextSlide(3)">Siguiente ➡️</button>
+
+                    <div class="shop-grid">
+                        <div class="shop-item" onclick="toggleItem(this, 30)">
+                            <img src="centro_comercial/img_1.png" alt="Blusa">
+                            <h3>Blusa Linda</h3>
+                            <p class="price">$30.00</p>
+                        </div>
+                        <div class="shop-item" onclick="toggleItem(this, 50)">
+                            <img src="centro_comercial/img_2.png" alt="Vestido">
+                            <h3>Vestido Elegante</h3>
+                            <p class="price">$50.00</p>
+                        </div>
+                        <div class="shop-item" onclick="toggleItem(this, 40)">
+                            <img src="centro_comercial/img_3.png" alt="Zapatos">
+                            <h3>Zapatos de Tacón</h3>
+                            <p class="price">$40.00</p>
+                        </div>
+                    </div>
+
+                    <div class="checkout-area">
+                        <h3>Total: $<span class="total-display">0</span></h3>
+                        <button class="nav-btn pay-btn" onclick="openPaymentModal(2)">Realizar Pago</button>
+                    </div>
+
+                    <div class="nav-controls">
+                        <button class="nav-btn secondary" onclick="nextSlide(1)">⬅️ Anterior</button>
+                        <button class="nav-btn" onclick="nextSlide(3)">Siguiente ➡️</button>
+                    </div>
                 </div>
 
-                <!-- Slide 3: Restaurante -->
-                <div class="slide" id="slide-3">
-                    <h2>3. Almuerzo Romántico 🍝</h2>
-                    <div class="img-placeholder">
-                        <!-- <img src="ruta/a/imagen3.jpg" alt="Restaurante"> -->
+                <div class="slide" id="slide-3" data-total="0" style="background-image: url('restaurante/bg.jpg');">
+                    <div class="slide-header">
+                        <h2>Almuerzo Romántico</h2>
+                        <p>Ya es tarde Milu, debemos comer algo. Pide lo que quieras:</p>
                     </div>
-                    <p>Un almuerzo especial en nuestro lugar favorito, disfrutando de nuestra comida y compañía.</p>
-                    <button class="nav-btn secondary" onclick="nextSlide(2)">⬅️ Anterior</button>
-                    <button class="nav-btn" onclick="nextSlide(4)">Siguiente ➡️</button>
+
+                    <div class="shop-grid">
+                        <div class="shop-item" onclick="toggleItem(this, 80)">
+                            <img src="restaurante/img_1.png" alt="Cena">
+                            <h3>Cena Romántica</h3>
+                            <p class="price">$80.00</p>
+                        </div>
+                        <div class="shop-item" onclick="toggleItem(this, 25)">
+                            <img src="restaurante/img_2.png" alt="Vino">
+                            <h3>Vino Tinto</h3>
+                            <p class="price">$25.00</p>
+                        </div>
+                        <div class="shop-item" onclick="toggleItem(this, 15)">
+                            <img src="restaurante/img_3.png" alt="Aperitivos">
+                            <h3>Aperitivos</h3>
+                            <p class="price">$15.00</p>
+                        </div>
+                    </div>
+
+                    <div class="checkout-area">
+                        <h3>Total: $<span class="total-display">0</span></h3>
+                        <button class="nav-btn pay-btn" onclick="openPaymentModal(3)">Realizar Pago</button>
+                    </div>
+
+                    <div class="nav-controls">
+                        <button class="nav-btn secondary" onclick="nextSlide(2)">⬅️ Anterior</button>
+                        <button class="nav-btn" onclick="nextSlide(4)">Siguiente ➡️</button>
+                    </div>
                 </div>
 
-                <!-- Slide 4: Joyería -->
-                <div class="slide" id="slide-4">
-                    <h2>4. Una Sorpresa Especial 💍</h2>
-                    <div class="img-placeholder">
-                        <!-- <img src="ruta/a/imagen4.jpg" alt="Joyería"> -->
+                <div class="slide" id="slide-4" data-total="0" style="background-image: url('joyeria/bg.jpg');">
+                    <div class="slide-header">
+                        <h2>Accesorios para el amor de mi vida</h2>
+                        <p>Un detalle que brille para la persona que ilumina mi vida:</p>
                     </div>
-                    <p>Un detalle brillante para la persona que ilumina mi vida cada día.</p>
-                    <button class="nav-btn secondary" onclick="nextSlide(3)">⬅️ Anterior</button>
-                    <button class="nav-btn" onclick="nextSlide(5)">Siguiente ➡️</button>
+
+                    <div class="shop-grid">
+                        <div class="shop-item" onclick="toggleItem(this, 200)">
+                            <img src="joyeria/img_1.png" alt="Anillo">
+                            <h3>Anillo</h3>
+                            <p class="price">$200.00</p>
+                        </div>
+                        <div class="shop-item" onclick="toggleItem(this, 150)">
+                            <img src="joyeria/img_2.png" alt="Collar">
+                            <h3>Collar</h3>
+                            <p class="price">$150.00</p>
+                        </div>
+                        <div class="shop-item" onclick="toggleItem(this, 100)">
+                            <img src="joyeria/img_3.png" alt="Pulsera">
+                            <h3>Pulsera</h3>
+                            <p class="price">$100.00</p>
+                        </div>
+                        <div class="shop-item" onclick="toggleItem(this, 80)">
+                            <img src="joyeria/img_4.png" alt="Aretes">
+                            <h3>Aretes</h3>
+                            <p class="price">$80.00</p>
+                        </div>
+                    </div>
+
+                    <div class="checkout-area">
+                        <h3>Total: $<span class="total-display">0</span></h3>
+                        <button class="nav-btn pay-btn" onclick="openPaymentModal(4)">Realizar Pago</button>
+                    </div>
+
+                    <div class="nav-controls">
+                        <button class="nav-btn secondary" onclick="nextSlide(3)">⬅️ Anterior</button>
+                        <button class="nav-btn" onclick="nextSlide(5)">Siguiente ➡️</button>
+                    </div>
                 </div>
 
-                <!-- Slide 5: Parque -->
-                <div class="slide" id="slide-5">
-                    <h2>5. Atardecer en el Parque 🌳</h2>
-                    <div class="img-placeholder">
-                        <!-- <img src="ruta/a/imagen5.jpg" alt="Parque"> -->
+                <div class="slide" id="slide-5" data-total="0" style="background-image: url('parque/bg.jpg');">
+                    <div class="slide-header">
+                        <h2>Atardecer en el Parque</h2>
+                        <p>Sentarnos y relajarnos, mientras comemos algo:</p>
                     </div>
-                    <p>Terminamos el día viendo el atardecer, agradeciendo por un San Valentín perfecto a tu lado.</p>
-                    <p style="font-weight: bold; color: #e63946;">¡Te Amo!</p>
-                    <button class="nav-btn secondary" onclick="nextSlide(4)">⬅️ Anterior</button>
-                    <a href="index.html" class="nav-btn" style="text-decoration: none;">Finalizar Cita ❤️</a>
+
+                    <div class="shop-grid">
+                        <div class="shop-item" onclick="toggleItem(this, 5)">
+                            <img src="parque/img_1.png" alt="Helado">
+                            <h3>Helado Doble</h3>
+                            <p class="price">$5.00</p>
+                        </div>
+                        <div class="shop-item" onclick="toggleItem(this, 4)">
+                            <img src="parque/img_2.png" alt="Chocolate">
+                            <h3>Chocolates</h3>
+                            <p class="price">$4.00</p>
+                        </div>
+                        <div class="shop-item" onclick="toggleItem(this, 3)">
+                            <img src="parque/img_3.png" alt="Battimix">
+                            <h3>Battimix</h3>
+                            <p class="price">$3.00</p>
+                        </div>
+                    </div>
+
+                    <div class="checkout-area">
+                        <h3>Total: $<span class="total-display">0</span></h3>
+                        <button class="nav-btn pay-btn" onclick="openPaymentModal(5)">Realizar Pago</button>
+                    </div>
+
+                    <div class="nav-controls">
+                        <button class="nav-btn secondary" onclick="nextSlide(4)">⬅️ Anterior</button>
+                        <button class="nav-btn" onclick="window.location.href='mensaje_especial/index.html'">Mensaje
+                            Especial</button>
+                    </div>
                 </div>
 
             </div>
         </div>
 
+        <div id="payment-modal" class="payment-modal">
+            <div class="payment-modal-content">
+                <h2>Elige un método de pago</h2>
+                <div class="payment-options">
+                    <button class="payment-btn" onclick="handlePaymentChoice('me')">Usar mi Tarjeta</button>
+                    <button class="payment-btn" onclick="handlePaymentChoice('bf')">Usar la Tarjeta de Mi Novio</button>
+                </div>
+                <button class="nav-btn secondary" onclick="closePaymentModal()"
+                    style="margin-top:20px;">Cancelar</button>
+            </div>
+        </div>
+
+        <div id="bf-interject-modal" class="payment-modal">
+            <div class="payment-modal-content bf-interject-content">
+                <h2>¡Yo pago preciosa!</h2>
+                <img src="assets/yo_pago.gif" alt="Yo pago gif" style="width: 150px; height: auto;">
+                <br>
+                <button class="nav-btn" onclick="confirmBfPayment()">Aceptar</button>
+            </div>
+        </div>
+
+        <div id="welcome-modal" class="payment-modal" style="display: none;">
+            <div class="payment-modal-content">
+                <h2>¡Sorpresa!</h2>
+                <p style="font-size: 1.2rem; margin: 15px 0;">Tendremos una cita mi amor, iremos por muchos lugares.</p>
+                <img src="assets/welcome_cita.png" alt="Happy" style="width: 100px; margin-bottom: 15px;">
+                <br>
+                <button class="nav-btn" onclick="closeWelcomeModal()">¡Vamos!</button>
+            </div>
+        </div>
+
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const targetDate = new Date('2026-02-14T00:00:00');
-            const now = new Date();
-            // const now = new Date('2026-02-14T00:00:01');
+    </div>
 
-            const lockedContent = document.getElementById('locked-content');
-            const unlockedContent = document.getElementById('unlocked-content');
-
-            if (now >= targetDate) {
-                unlockedContent.classList.add('show-content');
-            } else {
-                lockedContent.classList.add('show-content');
-            }
-        });
-
-        // Carousel Logic
-        function nextSlide(slideNumber) {
-            // Hide all slides
-            const slides = document.querySelectorAll('.slide');
-            slides.forEach(slide => slide.classList.remove('active-slide'));
-
-            // Show target slide
-            const targetSlide = document.getElementById('slide-' + slideNumber);
-            if (targetSlide) {
-                targetSlide.classList.add('active-slide');
-            }
-        }
-    </script>
-
+    <script src="san_valentin.js"></script>
 </body>
 
 </html>

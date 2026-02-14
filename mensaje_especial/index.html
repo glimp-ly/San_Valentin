@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Ti, mi Milu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="special-container">
+        <div class="special-content-wrapper">
+            <div class="flower-collage">
+                <img src="../assets/flores/img_1.png" alt="Ramo 1" class="collage-img img-1">
+                <img src="../assets/flores/img_2.png" alt="Ramo 2" class="collage-img img-2">
+                <img src="../assets/flores/img_3.png" alt="Ramo 3" class="collage-img img-3">
+                <img src="../assets/flores/img_4.png" alt="Ramo 4" class="collage-img img-4">
+            </div>
+
+            <div class="message-content">
+                <h2>Un Mensaje Para Ti mi linda noviecita, mi Milulinda</h2>
+                <p>Espero que te haya gustado nuestro paseo. Ahora tengo algo que decirte.</p>
+
+                <button class="nav-btn" onclick="openLetter()">Leer Carta 💌</button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="love-audio" loop>
+        <source src="../assets/love_music.ogg" type="audio/ogg">
+    </audio>
+
+    <button id="audio-control" class="audio-btn">
+        <img src="../assets/play_music.png" alt="Music Control">
+    </button>
+
+    <button class="back-home-btn" onclick="window.location.href='../index.html'">⬅️ Volver al Inicio</button>
+
+    <div id="letter-overlay" class="overlay">
+        <div class="letter-card">
+            <button class="close-btn" onclick="closeLetter()">×</button>
+            <div class="letter-content">
+                <h2>Amor de mi Vida</h2>
+                <p>
+                    Mi linda noviecita, mi prometida, te amo demasiado preciosa,
+                    de verdad, ocupas un lugar tan especial en mi corazón Milulinda,
+                    en serio considero que eres el amor de mi vida, mi vida hermosa,
+                    mi alma gemela, mi media naranja, mi hilo rojo del destino, mi todo
+                    amor, gracias por siempre estar a mi lado, siempre estar conmigo.
+                    Gracias por dejarme estar contigo, por amarme tanto, por hacerme
+                    sentir tan bien, me haces sentir tan feliz, tan motivado, tan optimista.
+                    Por ti quiero tener un buen futuro, eres mi motivación para seguir
+                    intentanto y esforzarme. Eres mi mayor orgullo Milu, eres la persona a la
+                    que más amo en el mundo y siempre pero sieeeeempre será así. Siempre serás
+                    tú y solo tú mi amor, me encantas demasiado, daría mi vida por tí, mi
+                    princesita, te amo, te amo, te amo, te amo, te amo, te amo, te amo, te amo mi
+                    futura esposa, mi prometida, mi novia, mi Milu. Feliz San Valentin mi
+                    Milulinda preciosa, lindota, hermosa, bondadosa, genial, guapa, increible,
+                    maravillosa, fascinante, sorprendente. Esta vez nuestra cita es virtual, pero
+                    en el futuro, el otro año probablemente, la cita será presencial, te lo prometo.
+                    Y todos los años tendremos citas, muy lindas, donde podamos hacer todo lo anterior.
+                    Te amo Mi, mi novecita hermosa, mi Milulinda.
+                    <br><br>
+                    Feliz San Valentín mi amor.
+                    <br><br>
+                    Con todo mi amor,<br>
+                    Guillermo
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
